@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.goclub.xian</groupId>
-	<artifactId>go-club</artifactId>
+	<artifactId>go-club-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>go-club</name>
+	<name>go-club-backend</name>
 	<description>Go club management</description>
 	<url/>
 	<licenses>
