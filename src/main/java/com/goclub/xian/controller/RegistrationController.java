@@ -6,6 +6,7 @@ import com.goclub.xian.models.Tournament;
 import com.goclub.xian.repository.RegistrationRepository;
 import com.goclub.xian.repository.UserRepository;
 import com.goclub.xian.repository.TournamentRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+@Tag(name = "Registration", description = "报名相关接口")
 @RestController
 @RequestMapping("/api/registrations")
 @RequiredArgsConstructor

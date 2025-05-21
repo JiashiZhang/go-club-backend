@@ -8,14 +8,17 @@ import java.sql.Date;
 @Entity
 @Table(name = "tournament")
 public class Tournament {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
-    private Date date;
-
+    private String type;
+    private String startTime; // 或 LocalDateTime startTime
+    private String endTime;   // 或 LocalDateTime endTime
     private String location;
+    private String rules;
+    private String status;
+    private String createdBy;
+
+    // getter & setter
 }
