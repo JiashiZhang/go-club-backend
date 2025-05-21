@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,6 +49,23 @@ public class UserController {
         result.put("users", users);
         return result;
     }
+
+    // UserController.java
+    @GetMapping("/api/users/page")
+    public ResponseEntity<Map<String, Object>> searchUsers(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String q,
+            @RequestParam(required = false) String field // 支持指定字段查找
+    ) {
+        Page<User> userPage = userService.searchUsers(page, size, q, field);
+        Map<String, Object> result = new HashMap<>();
+        result.put("content", userPage.getContent());
+        result.put("totalElements", userPage.getTotalElements());
+        return ResponseEntity.ok(result);
+    }
+
+
     // 详情
     @GetMapping("/{id}")
     public UserDTO detail(@PathVariable Long id, Authentication authentication) {
