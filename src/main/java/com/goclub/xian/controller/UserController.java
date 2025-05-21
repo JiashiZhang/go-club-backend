@@ -3,6 +3,7 @@ package com.goclub.xian.controller;
 import com.goclub.xian.models.User;
 import com.goclub.xian.models.dto.UserDTO;
 import com.goclub.xian.repository.UserRepository;
+import com.goclub.xian.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +22,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepository userRepo;
+    private final UserService userService;
 
     @GetMapping
     public List<User> list() {
@@ -33,25 +35,24 @@ public class UserController {
     }
 
     // 分页+搜索
-    @GetMapping("/page")
-    public Map<String, Object> page(@RequestParam(defaultValue = "1") int page,
-                                    @RequestParam(defaultValue = "50") int size) {
-        List<Map<String, Object>> users = new ArrayList<>();
-        for (int i = 1; i <= size; i++) {
-            Map<String, Object> user = new HashMap<>();
-            user.put("id", (page - 1) * size + i);
-            user.put("username", "user" + ((page - 1) * size + i));
-            users.add(user);
-        }
-        Map<String, Object> result = new HashMap<>();
-        result.put("page", page);
-        result.put("size", size);
-        result.put("users", users);
-        return result;
-    }
+//    @GetMapping("/page")
+//    public Map<String, Object> page(@RequestParam(defaultValue = "1") int page,
+//                                    @RequestParam(defaultValue = "50") int size) {
+//        List<Map<String, Object>> users = new ArrayList<>();
+//        for (int i = 1; i <= size; i++) {
+//            Map<String, Object> user = new HashMap<>();
+//            user.put("id", (page - 1) * size + i);
+//            user.put("username", "user" + ((page - 1) * size + i));
+//            users.add(user);
+//        }
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("page", page);
+//        result.put("size", size);
+//        result.put("users", users);
+//        return result;
+//    }
 
-    // UserController.java
-    @GetMapping("/api/users/page")
+    @GetMapping("/page")
     public ResponseEntity<Map<String, Object>> searchUsers(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size,
