@@ -50,7 +50,6 @@ public class UserController {
         return result;
     }
 
-    // UserController.java
     @GetMapping("/api/users/page")
     public ResponseEntity<Map<String, Object>> searchUsers(
             @RequestParam(defaultValue = "1") int page,
