@@ -49,4 +49,6 @@ public class User {
     private Date createdAt;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    private int eloRating;
 }

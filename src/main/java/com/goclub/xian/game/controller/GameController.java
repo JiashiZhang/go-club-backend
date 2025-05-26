@@ -1,8 +1,10 @@
 package com.goclub.xian.game.controller;
 
 import com.goclub.xian.game.models.Game;
+import com.goclub.xian.game.models.GameDTO;
 import com.goclub.xian.game.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -12,16 +14,6 @@ public class GameController {
 
     @Autowired
     private GameService gameService;
-
-    // 录入一场比赛
-    @PostMapping("/record")
-    public Game recordGame(@RequestBody Game game) {
-        return gameService.recordGame(
-                game.getTournamentId(), game.getRound(), game.getTableNo(),
-                game.getPlayerAId(), game.getPlayerBId(), game.getResult(),
-                game.getARatingBefore(), game.getBRatingBefore(),
-                game.getARatingAfter(), game.getBRatingAfter());
-    }
 
     // 查询某用户所有历史对局
     @GetMapping("/user/{userId}")
@@ -46,4 +38,11 @@ public class GameController {
     public GameService.UserGameStats getUserStats(@PathVariable Long userId) {
         return gameService.getUserStats(userId);
     }
+
+    @PostMapping("/record")
+    public ResponseEntity<?> createGame(@RequestBody GameDTO gameDto) {
+        gameService.recordGameAndUpdateElo(gameDto);
+        return ResponseEntity.ok().build();
+    }
+
 }

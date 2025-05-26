@@ -24,6 +24,7 @@ public class Game {
     private Long playerAId;
     @Column(name = "player_b_id")
     private Long playerBId;
+    @Column(name = "result")
     private String result;   // "A_WIN", "B_WIN", "DRAW", "FORFEIT"
     @Column(name = "a_rating_before")
     private Integer aRatingBefore;
@@ -33,6 +34,10 @@ public class Game {
     private Integer aRatingAfter;
     @Column(name = "b_rating_after")
     private Integer bRatingAfter;
-
+    @Column(name = "play_time")
     private LocalDateTime playTime;
+    @Column(name = "game_record")
+    private String gameRecord;
+    @Column(name = "remark")
+    private String remark;
 }

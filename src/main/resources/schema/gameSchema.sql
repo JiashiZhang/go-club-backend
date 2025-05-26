@@ -12,3 +12,7 @@ CREATE TABLE game (
                       b_rating_after INT,
                       play_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE game
+    ADD COLUMN game_record_url VARCHAR(255),
+    ADD COLUMN remark VARCHAR(255);
