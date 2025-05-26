@@ -1,4 +1,4 @@
-package com.goclub.xian.models;
+package com.goclub.xian.user.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -49,4 +49,6 @@ public class User {
     private Date createdAt;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    private int eloRating;
 }

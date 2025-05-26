@@ -1,6 +1,6 @@
-package com.goclub.xian.repository;
+package com.goclub.xian.user.repository;
 
-import com.goclub.xian.models.User;
+import com.goclub.xian.user.models.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

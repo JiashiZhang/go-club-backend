@@ -1,8 +1,7 @@
-package com.goclub.xian.models;
+package com.goclub.xian.tournament.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.sql.Date;
 
 @Data
 @Entity

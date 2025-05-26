@@ -17,7 +17,7 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/login", "/register", "/public/**","/api/**").permitAll()
+                        .requestMatchers("/login", "/register", "/public/**","/api/**","/api/games", "/api/games/**").permitAll()
                         .anyRequest().hasRole("SUPERADMIN")
                 )
                 .formLogin(Customizer.withDefaults())
