@@ -1,11 +1,11 @@
-package com.goclub.xian.controller;
+package com.goclub.xian.registration.controller;
 
-import com.goclub.xian.models.Registration;
-import com.goclub.xian.models.User;
-import com.goclub.xian.models.Tournament;
-import com.goclub.xian.repository.RegistrationRepository;
-import com.goclub.xian.repository.UserRepository;
-import com.goclub.xian.repository.TournamentRepository;
+import com.goclub.xian.registration.models.Registration;
+import com.goclub.xian.user.models.User;
+import com.goclub.xian.tournament.models.Tournament;
+import com.goclub.xian.registration.repository.RegistrationRepository;
+import com.goclub.xian.user.repository.UserRepository;
+import com.goclub.xian.tournament.repository.TournamentRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

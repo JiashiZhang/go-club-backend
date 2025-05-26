@@ -1,7 +1,7 @@
-package com.goclub.xian.controller;
+package com.goclub.xian.tournament.controller;
 
-import com.goclub.xian.models.Tournament;
-import com.goclub.xian.repository.TournamentRepository;
+import com.goclub.xian.tournament.models.Tournament;
+import com.goclub.xian.tournament.repository.TournamentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

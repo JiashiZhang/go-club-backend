@@ -1,4 +1,4 @@
-package com.goclub.xian.models;
+package com.goclub.xian.user.models;
 
 import jakarta.persistence.*;
 import lombok.Data;

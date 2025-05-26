@@ -4,8 +4,8 @@ import com.goclub.xian.elo.util.EloUtil;
 import com.goclub.xian.game.models.Game;
 import com.goclub.xian.game.models.GameDTO;
 import com.goclub.xian.game.repository.GameRepository;
-import com.goclub.xian.models.User;
-import com.goclub.xian.repository.UserRepository;
+import com.goclub.xian.user.models.User;
+import com.goclub.xian.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,14 +1,11 @@
-package com.goclub.xian.controller;
+package com.goclub.xian.user.controller;
 
-import com.goclub.xian.models.User;
-import com.goclub.xian.models.dto.UserDTO;
-import com.goclub.xian.repository.UserRepository;
-import com.goclub.xian.service.UserService;
+import com.goclub.xian.user.models.User;
+import com.goclub.xian.user.models.dto.UserDTO;
+import com.goclub.xian.user.repository.UserRepository;
+import com.goclub.xian.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
