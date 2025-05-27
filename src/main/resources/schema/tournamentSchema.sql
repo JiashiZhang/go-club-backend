@@ -9,3 +9,6 @@ CREATE TABLE tournament (
                             status VARCHAR(20),
                             created_by BIGINT
 );
+ALTER TABLE tournament
+ADD COLUMN province_limit VARCHAR(30),
+ADD COLUMN city_limit VARCHAR(30);

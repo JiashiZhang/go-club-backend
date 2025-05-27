@@ -2,7 +2,7 @@ package com.goclub.xian.game.service;
 
 import com.goclub.xian.elo.util.EloUtil;
 import com.goclub.xian.game.models.Game;
-import com.goclub.xian.game.models.GameDTO;
+import com.goclub.xian.dto.GameDTO;
 import com.goclub.xian.game.repository.GameRepository;
 import com.goclub.xian.user.models.User;
 import com.goclub.xian.user.repository.UserRepository;

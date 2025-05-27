@@ -1,4 +1,4 @@
-package com.goclub.xian.user.models.dto;
+package com.goclub.xian.dto;
 
 import lombok.Data;
 

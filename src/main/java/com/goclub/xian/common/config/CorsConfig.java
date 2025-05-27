@@ -1,7 +1,6 @@
-package com.goclub.xian.config;
+package com.goclub.xian.common.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration

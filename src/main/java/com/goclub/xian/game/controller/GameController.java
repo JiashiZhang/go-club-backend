@@ -1,7 +1,7 @@
 package com.goclub.xian.game.controller;
 
 import com.goclub.xian.game.models.Game;
-import com.goclub.xian.game.models.GameDTO;
+import com.goclub.xian.dto.GameDTO;
 import com.goclub.xian.game.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
