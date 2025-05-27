@@ -35,4 +35,9 @@ public class TournamentServiceImpl implements TournamentService {
         return tournamentRepository.findAll(pageable);
     }
 
+    @Override
+    public List<Tournament> findAll() {
+        return tournamentRepository.findAll();
+    }
+
 }

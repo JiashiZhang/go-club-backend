@@ -10,5 +10,6 @@ public interface TournamentService {
     Tournament save(Tournament tournament);
     Tournament getById(Long id);
     Page<Tournament> findAll(Pageable pageable);
+    List<Tournament> findAll();
 
 }
