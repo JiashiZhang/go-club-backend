@@ -1,7 +1,7 @@
 package com.goclub.xian.tournament.service;
 
-import com.goclub.xian.tournament.models.TournamentGroup;
-import com.goclub.xian.tournament.repository.TournamentGroupRepository;
+import com.goclub.xian.tournament.models.Group;
+import com.goclub.xian.tournament.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,24 +9,24 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TournamentGroupService {
+public class GroupService {
 
     @Autowired
-    private TournamentGroupRepository groupRepository;
+    private GroupRepository groupRepository;
 
-    public TournamentGroup save(TournamentGroup group) {
+    public Group save(Group group) {
         return groupRepository.save(group);
     }
 
-    public TournamentGroup getById(Long id) {
+    public Group getById(Long id) {
         return groupRepository.findById(id).orElse(null);
     }
 
-    public Page<TournamentGroup> findAll(Pageable pageable) {
+    public Page<Group> findAll(Pageable pageable) {
         return groupRepository.findAll(pageable);
     }
 
-    public List<TournamentGroup> findByTournamentId(Long tournamentId) {
+    public List<Group> findByTournamentId(Long tournamentId) {
         return groupRepository.findByTournamentId(tournamentId);
     }
 

@@ -2,6 +2,7 @@ package com.goclub.xian.registration.controller;
 
 import com.goclub.xian.registration.models.Registration;
 import com.goclub.xian.registration.repository.RegistrationRepository;
+import com.goclub.xian.tournament.repository.GroupRepository;
 import com.goclub.xian.user.repository.UserRepository;
 import com.goclub.xian.tournament.repository.TournamentRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,7 +24,7 @@ public class RegistrationController {
     private final RegistrationRepository registrationRepo;
     private final UserRepository userRepo;
     private final TournamentRepository tournamentRepo;
-
+    private final GroupRepository groupRepository;
     // 列出所有报名（不分页，不推荐大数据量时用）
     @GetMapping
     public List<Registration> list() {
@@ -35,27 +36,31 @@ public class RegistrationController {
     public Registration create(@RequestBody Registration registration) {
         Long userId = registration.getUserId();
         Long tournamentId = registration.getTournamentId();
+        Long groupId = registration.getGroupId();
 
-        // 校验用户、赛事存在性
-        if (!userRepo.existsById(userId)) {
-            throw new RuntimeException("用户不存在");
-        }
-        if (!tournamentRepo.existsById(tournamentId)) {
-            throw new RuntimeException("赛事不存在");
-        }
+        // 1. 检查用户、赛事存在
+        if (!userRepo.existsById(userId)) throw new RuntimeException("用户不存在");
+        if (!tournamentRepo.existsById(tournamentId)) throw new RuntimeException("赛事不存在");
 
-        // 防止重复报名
+        // 2. 防止重复报名
         if (registrationRepo.existsByUserIdAndTournamentId(userId, tournamentId)) {
             throw new RuntimeException("该用户已报名本赛事，不能重复报名");
         }
 
-        // 设置报名时间、状态（如前端没传可加默认值）
+        // 3. 校验 groupId（建议你加个 groupRepository）
+        if (groupId == null) throw new RuntimeException("必须选择分组");
+        if (!groupRepository.existsById(groupId)) throw new RuntimeException("分组不存在");
+        // 可选：校验该分组属于该赛事
+        var group = groupRepository.findById(groupId).orElseThrow(() -> new RuntimeException("分组不存在"));
+        if (!group.getTournamentId().equals(tournamentId)) throw new RuntimeException("分组不属于该赛事");
+
+        // 4. 补充默认值
         registration.setRegisterTime(new Timestamp(System.currentTimeMillis()).toLocalDateTime());
-        if (registration.getStatus() == null) {
-            registration.setStatus("UNREGISTERED");
-        }
+        if (registration.getStatus() == null) registration.setStatus("UNREGISTERED");
+
         return registrationRepo.save(registration);
     }
+
 
     // 修改报名
     @PutMapping("/{id}")

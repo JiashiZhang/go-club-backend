@@ -2,8 +2,8 @@ package com.goclub.xian.registration.service;
 
 import com.goclub.xian.registration.models.Registration;
 import com.goclub.xian.tournament.models.Tournament;
-import com.goclub.xian.tournament.models.TournamentGroup;
-import com.goclub.xian.tournament.repository.TournamentGroupRepository;
+import com.goclub.xian.tournament.models.Group;
+import com.goclub.xian.tournament.repository.GroupRepository;
 import com.goclub.xian.tournament.repository.TournamentRepository;
 import com.goclub.xian.user.models.User;
 
@@ -20,10 +20,10 @@ import java.time.LocalDateTime;
 public class RegistrationService {
 
     private final TournamentRepository tournamentRepository;
-    private final TournamentGroupRepository groupRepository;
+    private final GroupRepository groupRepository;
     private final RegistrationRepository registrationRepository;
 
-    public void checkEligibility(User user, Tournament tournament, TournamentGroup group) {
+    public void checkEligibility(User user, Tournament tournament, Group group) {
         // 区域校验
         if (tournament.getProvinceLimit() != null && !tournament.getProvinceLimit().isEmpty()) {
             if (!tournament.getProvinceLimit().equals(user.getProvince())) {
@@ -56,7 +56,7 @@ public class RegistrationService {
     public Registration register(User user, Long tournamentId, Long groupId, String remark) {
         Tournament tournament = tournamentRepository.findById(tournamentId)
                 .orElseThrow(() -> new RuntimeException("比赛不存在"));
-        TournamentGroup group = groupRepository.findById(groupId)
+        Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new RuntimeException("组别不存在"));
 
         checkEligibility(user, tournament, group);
