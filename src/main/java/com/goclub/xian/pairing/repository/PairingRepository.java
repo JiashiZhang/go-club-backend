@@ -8,4 +8,5 @@ import java.util.List;
 public interface PairingRepository extends JpaRepository<Pairing, Long> {
     List<Pairing> findByTournamentIdAndRound(Long tournamentId, Integer round);
     List<Pairing> findByTournamentId(Long tournamentId);
+
 }

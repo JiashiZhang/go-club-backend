@@ -13,30 +13,30 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tournaments/{tournamentId}")
 public class PairingController {
-
     @Autowired
     private PairingService pairingService;
 
-    // 生成某轮对阵（管理员权限）
+//    @GetMapping("/rounds")
+//    public List<Integer> getRounds(@PathVariable Long tournamentId) {
+//        return pairingService.getAllRounds(tournamentId);
+//    }
+
     @PostMapping("/pairings/generate")
     public ResponseEntity<?> generatePairing(@PathVariable Long tournamentId, @RequestParam Integer round) {
         pairingService.generatePairing(tournamentId, round);
         return ResponseEntity.ok("Pairing generated");
     }
 
-    // 查询某轮对阵表
     @GetMapping("/pairings")
     public List<Pairing> getPairings(@PathVariable Long tournamentId, @RequestParam Integer round) {
         return pairingService.getPairings(tournamentId, round);
     }
 
-    // 查询某轮轮空
     @GetMapping("/byes")
     public List<Bye> getByes(@PathVariable Long tournamentId, @RequestParam Integer round) {
         return pairingService.getByes(tournamentId, round);
     }
 
-    // 录入对阵结果
     @PostMapping("/pairings/{pairingId}/result")
     public ResponseEntity<?> submitResult(
             @PathVariable Long tournamentId,

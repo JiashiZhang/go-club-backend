@@ -1,4 +1,4 @@
-package com.goclub.xian.game.models;
+package com.goclub.xian.dto;
 
 import lombok.Data;
 

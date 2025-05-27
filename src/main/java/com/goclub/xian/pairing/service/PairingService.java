@@ -90,4 +90,8 @@ public class PairingService {
         pairing.setResult(result);
         pairingRepository.save(pairing);
     }
+
+//    public List<Integer> getAllRounds(Long tournamentId) {
+//        return pairingRepository.
+//    }
 }

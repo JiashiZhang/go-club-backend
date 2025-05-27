@@ -21,6 +21,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
     // 你也可以写分页版
     Page<Game> findAllByOrderByPlayTimeAsc(Pageable pageable);
+    List<Game> findAllByPlayerAIdOrPlayerBIdOrderByPlayTimeAsc(Long playerAId, Long playerBId);
 
     // 如果想查某个用户所有对局（历史战绩）
 }

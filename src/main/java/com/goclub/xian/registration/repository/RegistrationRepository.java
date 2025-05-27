@@ -11,5 +11,10 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
     Page<Registration> findByTournamentId(Long tournamentId, Pageable pageable);
     List<Registration> findByTournamentId(Long tournamentId);
 
+    Page<Registration> findByGroupId(Long groupId, Pageable pageable);
+    List<Registration> findByGroupId(Long groupId);
+
     boolean existsByUserIdAndTournamentId(Long userId, Long tournamentId);
+
+    Page<Registration> findByUserId(Long userId, Pageable pageable);
 }

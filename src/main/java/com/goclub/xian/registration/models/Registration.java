@@ -1,29 +1,36 @@
 package com.goclub.xian.registration.models;
 
-import com.goclub.xian.tournament.models.Tournament;
-import com.goclub.xian.user.models.User;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "registration")
+@Table(name = "registration", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "tournament_id"}))
 public class Registration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
-    @ManyToOne
-    @JoinColumn(name = "tournament_id")
-    private Tournament tournament;
+    @Column(name = "tournament_id", nullable = false)
+    private Long tournamentId;
 
-    private Timestamp registerTime;
+    @Column(name = "group_id")
+    private Long groupId;
 
-    // 新加字段
+    @Column(name = "register_time")
+    private LocalDateTime registerTime;
+
     private String remark;
+
+    @Column(name = "sign_in_time")
+    private LocalDateTime signInTime;
+
+    private String status;
+
+    @Column(name = "level_code")
+    private Integer levelCode;
 }
