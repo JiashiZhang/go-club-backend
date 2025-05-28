@@ -33,4 +33,10 @@ public class TournamentController {
         return tournamentService.findAll(PageRequest.of(page, size));
     }
 
+    @GetMapping("/singleAll")
+    public List<Tournament> getAllTournaments() {
+        return tournamentService.findAll(); // 这里findAll()直接返回List，不分页
+    }
+
+
 }
