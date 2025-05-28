@@ -14,8 +14,10 @@ public class Group {
     @Column(name = "tournament_id")
     private Long tournamentId;
 
-    private String name; // 组别名（如“5级升2级”）
+    @Column(nullable = false, length = 50)
+    private String name;
     private Integer minLevel; // 最低级/段
     private Integer maxLevel; // 最高级/段
+    @Column(length = 100)
     private String remark;
 }

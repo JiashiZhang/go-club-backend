@@ -2,7 +2,6 @@ package com.goclub.xian.pairing.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.time.LocalDateTime;
 
 @Data
@@ -12,19 +11,27 @@ public class Pairing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tournament_id")
+
+    @Column(nullable = false)
     private Long tournamentId;
-    @Column(name = "round")
+
+    @Column(nullable = false)
     private Integer round;
-    @Column(name = "table_no")
+
+    @Column(nullable = false)
     private Integer tableNo;
-    @Column(name = "player_a_id")
+
+    @Column(nullable = false)
+    private Long groupId;
+
+    @Column(nullable = false)
     private Long playerAId;
-    @Column(name = "player_b_id")
+
+    @Column(nullable = false)
     private Long playerBId;
 
-    @Enumerated(EnumType.STRING)
-    private PairingResult result = PairingResult.NOT_PLAYED;
+    @Column(nullable = false, length = 16)
+    private String result = "NOT_PLAYED"; // 建议用字符串或枚举
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
