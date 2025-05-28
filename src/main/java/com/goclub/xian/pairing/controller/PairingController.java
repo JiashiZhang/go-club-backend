@@ -2,47 +2,52 @@ package com.goclub.xian.pairing.controller;
 
 import com.goclub.xian.pairing.models.Bye;
 import com.goclub.xian.pairing.models.Pairing;
-import com.goclub.xian.pairing.models.PairingResult;
 import com.goclub.xian.pairing.service.PairingService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/tournaments/{tournamentId}")
+@RequestMapping("/api/pairings")
+@RequiredArgsConstructor
 public class PairingController {
-    @Autowired
-    private PairingService pairingService;
 
-//    @GetMapping("/rounds")
-//    public List<Integer> getRounds(@PathVariable Long tournamentId) {
-//        return pairingService.getAllRounds(tournamentId);
-//    }
+    private final PairingService pairingService;
 
-    @PostMapping("/pairings/generate")
-    public ResponseEntity<?> generatePairing(@PathVariable Long tournamentId, @RequestParam Integer round) {
-        pairingService.generatePairing(tournamentId, round);
-        return ResponseEntity.ok("Pairing generated");
+    // 生成对阵和轮空
+    @PostMapping("/generate")
+    public void generatePairing(@RequestParam Long tournamentId, @RequestParam Long groupId, @RequestParam Integer round) {
+        pairingService.generatePairing(tournamentId, groupId, round);
     }
 
-    @GetMapping("/pairings")
-    public List<Pairing> getPairings(@PathVariable Long tournamentId, @RequestParam Integer round) {
-        return pairingService.getPairings(tournamentId, round);
+    // 查询某轮对阵
+    @GetMapping
+    public List<Pairing> getPairings(@RequestParam Long tournamentId, @RequestParam Long groupId, @RequestParam Integer round) {
+        return pairingService.getPairings(tournamentId, groupId, round);
     }
 
-    @GetMapping("/byes")
-    public List<Bye> getByes(@PathVariable Long tournamentId, @RequestParam Integer round) {
-        return pairingService.getByes(tournamentId, round);
+    // 查询某轮轮空
+    @GetMapping("/bye")
+    public List<Bye> getByes(@RequestParam Long tournamentId, @RequestParam Long groupId, @RequestParam Integer round) {
+        return pairingService.getByes(tournamentId, groupId, round);
     }
 
-    @PostMapping("/pairings/{pairingId}/result")
-    public ResponseEntity<?> submitResult(
-            @PathVariable Long tournamentId,
-            @PathVariable Long pairingId,
-            @RequestParam PairingResult result) {
+    // 录入成绩
+    @PostMapping("/submitResult")
+    public void submitResult(@RequestParam Long pairingId, @RequestParam String result) {
         pairingService.submitResult(pairingId, result);
-        return ResponseEntity.ok("Result saved");
+    }
+
+    // 判断本轮是否全部成绩录入
+    @GetMapping("/finished")
+    public boolean isRoundFinished(@RequestParam Long tournamentId, @RequestParam Long groupId, @RequestParam Integer round) {
+        return pairingService.isRoundFinished(tournamentId, groupId, round);
+    }
+
+    // 撤销某组某轮
+    @DeleteMapping("/round")
+    public void removeRound(@RequestParam Long tournamentId, @RequestParam Long groupId, @RequestParam Integer round) {
+        pairingService.removeRound(tournamentId, groupId, round);
     }
 }

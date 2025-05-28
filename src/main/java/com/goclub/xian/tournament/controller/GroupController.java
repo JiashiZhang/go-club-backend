@@ -4,44 +4,67 @@ import com.goclub.xian.tournament.models.Group;
 import com.goclub.xian.tournament.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/groups")
 public class GroupController {
+
     @Autowired
     private GroupService groupService;
 
-    // 新建/编辑
-    @PostMapping("/api/groups")
-    public Group save(@RequestBody Group group) {
+    // 自动批量生成标准组别
+    @PostMapping("/api/groups/auto-create")
+    public ResponseEntity<?> autoCreateGroups(@RequestParam Long tournamentId,
+                                              @RequestParam String type) { // type=级位 or 段位
+        try {
+            groupService.createDefaultGroups(tournamentId, type);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(Collections.singletonMap("message", e.getMessage()));
+        }
+    }
+
+
+    // 新增组别
+    @PostMapping
+    public Group addGroup(@RequestBody Group group) {
         return groupService.save(group);
     }
 
-    // 查详情
-    @GetMapping("/api/groups/{id}")
-    public Group get(@PathVariable Long id) {
+    // 修改组别
+    @PutMapping("/{id}")
+    public Group updateGroup(@PathVariable Long id, @RequestBody Group group) {
+        group.setId(id); // 保证用Path里的id
+        return groupService.update(group);
+    }
+
+    // 查询组别详情
+    @GetMapping("/{id}")
+    public Group getGroup(@PathVariable Long id) {
         return groupService.getById(id);
     }
 
-    // 分页列表
-    @GetMapping("/api/groups")
-    public Page<Group> list(@RequestParam(defaultValue = "0") int page,
-                            @RequestParam(defaultValue = "10") int size) {
-        return groupService.findAll(PageRequest.of(page, size));
-    }
-
-    // 推荐：按赛事ID查全部组
-    @GetMapping("/api/tournaments/{tournamentId}/groups")
-    public List<Group> byTournament(@PathVariable Long tournamentId) {
+    // 查询某赛事下所有组别
+    @GetMapping("/by-tournament")
+    public List<Group> getGroupsByTournament(@RequestParam Long tournamentId) {
         return groupService.findByTournamentId(tournamentId);
     }
 
-    // 删除
-    @DeleteMapping("/api/groups/{id}")
-    public void delete(@PathVariable Long id) {
+    // 分页查全部
+    @GetMapping
+    public Page<Group> list(Pageable pageable) {
+        return groupService.findAll(pageable);
+    }
+
+    // 删除组别
+    @DeleteMapping("/{id}")
+    public void deleteGroup(@PathVariable Long id) {
         groupService.deleteById(id);
     }
 }
